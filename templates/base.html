@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block titulo %}
+        {% endblock %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {% block head %}
+    {% endblock %}
+</head>
+<body class="bg-black text-gray-100 font-primary">
+    {% include 'navbar.html' %}
+    {% block content %}
+    {% endblock %}
+
+    {% comment %} CRIANDO UM SCRIPT PARA EDITAR DE FORMA DINÂMICA A BARRA DE NAVEGAÇÃO, ADICIONANDO E REMOVENDO CLASSES {% endcomment %}
+    <script>
+        {% comment %} Definindo uma variável "nav" para todas as Tag´s nav da Página {% endcomment %}
+        const nav = document.querySelector('nav')
+
+        {% comment %} 
+        Usando o addEventListener() para definir como a Barra de Navegação se comportará quando ocorrer o evento scroll:
+        1) Se o Scroll passar de 100 a Barra de Navegação terá um fundo Cinza e Se não passar de 100 continuará sendo Invisível 
+        2) Se o Scroll for maior que o Tamanho da Tela (maior do que o Banner Inicial), tornará a Barra de Navegação Invisível 
+        {% endcomment %}
+        document.addEventListener("scroll", e=>{
+            if(scrollY>100){
+                if(scrollY>window.innerHeight){
+                nav.classList.add('invisible')
+            }else{
+                nav.classList.add('bg-gray-900')
+                nav.classList.remove('invisible')
+            }
+            }else{
+                nav.classList.remove('bg-gray-900')
+                nav.classList.remove('invisible')
+            }
+        })
+
+    </script>
+
+
+    {% comment %} SCRIPTS COPIADOS DOS IONICS {% endcomment %}
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

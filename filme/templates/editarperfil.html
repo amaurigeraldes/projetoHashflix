@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% comment %} INSTALANDO, PREPARANDO E UTILIZANDO O CRISPY-FORMS - vide documentação https://github.com/django-crispy-forms/crispy-bootstrap5 {% endcomment %}
+{% comment %} 1) Instalando no Terminal: pip install django-crispy-forms {% endcomment %}
+{% comment %} 2) Instalando no Terminal: pip install crispy-bootstrap5 {% endcomment %}
+{% comment %} 3) Incluindo em settings.py na Seção INSTALLED_APPS: crispy_forms e crispy_bootstrap5 {% endcomment %}
+{% comment %} 4) Incluindo no final do settings.py a constante: CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5' {% endcomment %}
+{% comment %} 5) Incluindo no final do settings.py a constante: CRISPY_TEMPLATE_PACK = 'bootstrap5' {% endcomment %}
+{% comment %} 6) Carregando o crispy_forms_tags, extensão do BootStrap para a formatação do Formulário de Login {% endcomment %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+Editar Perfil
+{% endblock %}
+
+{% block content %}
+
+    <header class="min-h-screen bg-black bg-opacity-75 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat"  style="background-image: url('{% static 'images/background_netflix.jpg' %}');">
+        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
+            {% comment %} Exibindo o e-mail do Usuário Logado na Página de Editar Perfil {% endcomment %}
+            <h2 class="text-2xl">{{ user.username }}</h2>
+            <form method="post">
+                {% comment %} Ativando obrigatóriamente o {% csrf_token %} dentro de um form ao utilizar o method="post" para enviar uma informação para o sistema, gerado automaticamente pelo Django, para verificação de segurança de comunicação entre a Página e o Backend do Site {% endcomment %}
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Edite os campos abaixo para editar seu perfil</legend>
+                    {% comment %} Usando a variável "{{form}}" que já vem pronta, Formulário de Login (autenticação) do Usuário e Senha, da classe LoginView, esta estrutura é passada automaticamente pelo Django para o Html, sendo uma boa prática colocar dentro de um fieldset {% endcomment %}
+                    {% comment %} passando {{ form|crispy }} para efetuar a formatação {% endcomment %}
+                    {{ form|crispy }}
+                </fieldset>
+                <button class="bg-red-600 py-1 px-3 text-white md:text-lg rounded-md" type="submit">Editar Perfil</button>
+            </form>
+            <small><a href="{% url 'filme:mudarsenha' %}">Quer mudar sua senha?</a></small>
+        </div>
+    </header>
+
+    <footer class=" px-5 py-10 ">
+        <ul class="flex justify-between items-center">
+            
+            <li>&copy; 2021</li>
+            <li> Feito com Python (Django)</li>
+            <li>Hashtag</li>
+        </ul>
+    </footer>
+
+{% endblock %}
