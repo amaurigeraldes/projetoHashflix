@@ -143,12 +143,15 @@ import dj_database_url
 # Criando uma variável de ambiente (existe somente no Servidor) que passa o link do banco de dados
 # Obs.1: caso a biblioteca os ainda não tenha sido importada: import os
 # Obs.2: usando o getenv() e passando como parâmetro a variável de ambiente do BD criado no Railway
-DATABASE_URL = os.getenv("DATABASE_URL")
+# DATABASE_URL = os.getenv("DATABASE_URL")
+
+# 
+DATABASE_URL = os.getenv("postgresql://postgresql_projhashflix_7mtm_user:0jMGwKZvGnkUjTPuVbsH4YeVxZErR8dT@dpg-ct0ip1rtq21c73ef455g-a.oregon-postgres.render.com/postgresql_projhashflix_7mtm")
 
 
 # Configuração do banco de dados
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'), conn_max_age=1800)
 }
 
 
