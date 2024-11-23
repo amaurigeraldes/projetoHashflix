@@ -146,7 +146,7 @@ import dj_database_url
 # DATABASE_URL = os.getenv("DATABASE_URL")
 
 # 
-DATABASE_URL = os.getenv("postgresql://postgresql_projhashflix_7mtm_user:0jMGwKZvGnkUjTPuVbsH4YeVxZErR8dT@dpg-ct0ip1rtq21c73ef455g-a.oregon-postgres.render.com/postgresql_projhashflix_7mtm")
+DATABASE_URL = os.getenv("postgresql://hashflix_gfgx_user:Jbklnm5DKbATnHPamutdWzX4X1AwkEoa@dpg-ct0mvnogph6c73bbhu10-a.oregon-postgres.render.com/hashflix_gfgx")
 
 
 # Configuração do banco de dados
