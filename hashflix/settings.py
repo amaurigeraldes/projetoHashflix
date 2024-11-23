@@ -135,6 +135,12 @@ DATABASES = {
     }
 }
 
+
+from dotenv import load_dotenv
+
+load_dotenv()  # Carrega variáveis do .env
+
+
 # Importando a biblioteca que permite o Django se conectar com o database-url
 # Ver documentação: https://pypi.org/project/dj-database-url/
 import dj_database_url
@@ -143,18 +149,13 @@ import dj_database_url
 # Criando uma variável de ambiente (existe somente no Servidor) que passa o link do banco de dados
 # Obs.1: caso a biblioteca os ainda não tenha sido importada: import os
 # Obs.2: usando o getenv() e passando como parâmetro a variável de ambiente do BD criado no Railway
-# DATABASE_URL = os.getenv("DATABASE_URL")
-
-# 
-DATABASE_URL = os.getenv("postgresql://hashflix_gfgx_user:Jbklnm5DKbATnHPamutdWzX4X1AwkEoa@dpg-ct0mvnogph6c73bbhu10-a.oregon-postgres.render.com/hashflix_gfgx")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 # Configuração do banco de dados
 DATABASES = {
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'), conn_max_age=1800)
 }
-
-
 
 
 
