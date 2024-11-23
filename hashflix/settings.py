@@ -52,6 +52,7 @@ if os.getenv("PRODUCTION_DEBUG"):
 else:
     # Local impact: Modify this constant!
     DEBUG = True
+    
 if DEBUG:
     print("⚠️ Warning: LOCAL DEBUG Mode is Active!!")
 
@@ -138,16 +139,22 @@ DATABASES = {
 # Ver documentação: https://pypi.org/project/dj-database-url/
 import dj_database_url
 
+
 # Criando uma variável de ambiente (existe somente no Servidor) que passa o link do banco de dados
 # Obs.1: caso a biblioteca os ainda não tenha sido importada: import os
 # Obs.2: usando o getenv() e passando como parâmetro a variável de ambiente do BD criado no Railway
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Se existir uma variável de ambiente, define o Banco de Dados no Servidor
-if DATABASE_URL:
-    DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
-    }
+
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=DATABASE_URL,
+        conn_max_age=600,
+        ssl_require=True  # Adicione isso se o banco de dados exigir SSL
+    )
+}
+
 
 
 
