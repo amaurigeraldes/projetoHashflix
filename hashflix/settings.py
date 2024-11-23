@@ -51,7 +51,7 @@ if os.getenv("PRODUCTION_DEBUG"):
     DEBUG = False
 else:
     # Local impact: Modify this constant!
-    DEBUG = True
+    DEBUG = False
     
 if DEBUG:
     print("⚠️ Warning: LOCAL DEBUG Mode is Active!!")
@@ -146,15 +146,10 @@ import dj_database_url
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 
-
+# Configuração do banco de dados
 DATABASES = {
-    'default': dj_database_url.config(
-        default=DATABASE_URL,
-        conn_max_age=600,
-        ssl_require=True  # Adicione isso se o banco de dados exigir SSL
-    )
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
-
 
 
 
